@@ -1,4 +1,4 @@
-# Python Template Repository
+# Python template repository
 
 ### Create a virtual Python environment
 
@@ -12,4 +12,10 @@ source .venv/bin/activate
 ```bash
 pip install pre-commit
 pre-commit install
+```
+
+### Install the package in development mode
+
+```bash
+pip install -e .
 ```

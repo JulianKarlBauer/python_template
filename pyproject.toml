@@ -1,0 +1,45 @@
+[build-system]
+requires = [
+  "setuptools >= 61.0",
+  "setuptools-scm >= 8",
+  ]
+build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = [
+  "version",
+]
+name = "example"
+dependencies = [
+  "numpy",
+  "pytest"
+]
+requires-python = ">=3.12"
+authors = [
+  {name = "Julian Karl Bauer"},
+]
+maintainers = [
+  {name = "Julian Karl Bauer"},
+]
+description = "..."
+readme = "README.md"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+
+[tool.setuptools.package-data]
+"example.data" = ["*.yml"]
+
+[tool.setuptools.packages.find]
+include = ["example"]
+exclude = [
+  "docs*",
+  "tests",
+  "scripts",
+]
+namespaces = false
+
+[tool.setuptools_scm]
+root = "./" # Path to directory containing .git
+version_file = "example/_version.py"
