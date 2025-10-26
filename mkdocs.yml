@@ -1,0 +1,77 @@
+site_name: "example"
+site_url: https://juliankarlbauer.github.io/python_template/
+repo_url: https://github.com/JulianKarlBauer/python_template
+
+nav:
+  - Index: index.md
+
+theme:
+  name: material
+  language: en
+  features:
+    - content.code.copy
+    - content.code.annotate
+
+exclude_docs: |
+  README.md
+
+extra:
+  version:
+    provider: mike
+    alias: true
+    default:
+      - latest
+      - prod
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            relative_crossrefs: true
+
+            scoped_crossrefs: true
+
+            merge_init_into_class: true
+  - markdown-exec
+  - git-authors
+  - autorefs
+  - mike:
+      alias_type: redirect
+      redirect_template: null
+      deploy_prefix: ""
+      canonical_version: latest
+      version_selector: true
+      css_dir: css
+      javascript_dir: js
+  - open-in-new-tab:
+      add_icon: false
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - toc:
+      permalink: true
+      title: Page content
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets:
+      base_path:
+        - docs/snippets
+        - docs/cases
+      auto_append: ["references.md"]
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.details
+  - admonition
+  - attr_list
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
