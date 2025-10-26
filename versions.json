@@ -8,5 +8,12 @@
     "version": "2024",
     "title": "2024",
     "aliases": []
+  },
+  {
+    "version": "v0.0.1",
+    "title": "v0.0.1",
+    "aliases": [
+      "latest"
+    ]
   }
 ]
