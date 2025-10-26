@@ -1,3 +1,3 @@
 # Welcome to `example`
 
-content...
+content... [reference][home]
