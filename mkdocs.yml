@@ -46,7 +46,7 @@ markdown_extensions:
   - toc:
       permalink: true
       title: Page content
-  # - pymdownx.superfences:
+  - pymdownx.superfences:
   #     custom_fences:
   #       - name: mermaid
   #         class: mermaid
