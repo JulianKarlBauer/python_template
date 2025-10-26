@@ -1,20 +1,16 @@
 site_name: "example"
 site_url: https://juliankarlbauer.github.io/python_template/
 repo_url: https://github.com/JulianKarlBauer/python_template
-
 nav:
   - Index: index.md
-
 theme:
   name: material
   language: en
   features:
     - content.code.copy
     - content.code.annotate
-
 exclude_docs: |
   README.md
-
 extra:
   version:
     provider: mike
@@ -22,7 +18,6 @@ extra:
     default:
       - latest
       - prod
-
 plugins:
   - search
   - mkdocstrings:
@@ -30,9 +25,7 @@ plugins:
         python:
           options:
             relative_crossrefs: true
-
             scoped_crossrefs: true
-
             merge_init_into_class: true
   - markdown-exec
   - git-authors
@@ -47,18 +40,17 @@ plugins:
       javascript_dir: js
   - open-in-new-tab:
       add_icon: false
-
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - toc:
       permalink: true
       title: Page content
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+  # - pymdownx.superfences:
+  #     custom_fences:
+  #       - name: mermaid
+  #         class: mermaid
+  #         format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.snippets:

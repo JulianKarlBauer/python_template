@@ -1,51 +1,41 @@
 name: Build and deploy docs prior to release
-
 on:
-    workflow_dispatch:
-    push:
-        branches:
-            - 2024
-            - 2025
-
+  workflow_dispatch:
+  push:
+    branches:
+      - 2024
+      - 2025
 permissions:
-    contents: write
-
+  contents: write
 concurrency: # Do not run multiple instances of this workflow at the same time
-    group: example_docs
-    cancel-in-progress: false
-
+  group: example_docs
+  cancel-in-progress: false
 env:
-    branch_name: ${{ github.head_ref || github.ref_name }}
-
+  branch_name: ${{ github.head_ref || github.ref_name }}
 jobs:
-    deploy_docs:
-        runs-on: [ubuntu-latest]
-        timeout-minutes: 30 # Aborts if the build takes more than x minutes
-        steps:
-            - uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
-
-            - name: Set up Python
-              uses: actions/setup-python@v5
-              with:
-                  python-version: "3.12"
-
-            - name: Install package
-              run: pip install .[docs]
-
-            - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
-            - uses: actions/cache@v4
-              with:
-                  key: mkdocs-material-${{ env.cache_id }}
-                  path: .cache
-                  restore-keys: |
-                      mkdocs-material-
-
-            - name: Setup identity
-              run: |
-                  git config --global user.name "Github Action docs_latest"
-                  git config --global user.email docs.deploy@example.edu
-
-            - name: Deploy docs
-              run: mike deploy --push "${{ env.branch_name }}"
+  deploy_docs:
+    runs-on: [ubuntu-latest]
+    timeout-minutes: 30 # Aborts if the build takes more than x minutes
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package
+        run: pip install .[docs]
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - name: Setup identity
+        run: |
+          git config --global user.name "Github Action docs_latest"
+          git config --global user.email docs.deploy@example.edu
+      - name: Deploy docs
+        run: mike deploy --push "${{ env.branch_name }}"
