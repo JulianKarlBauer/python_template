@@ -1,6 +1,8 @@
-import example
 import importlib
+
 import yaml
+
+import example
 
 print(f"{example.__version__=}")
 
