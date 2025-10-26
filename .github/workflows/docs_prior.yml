@@ -6,7 +6,6 @@ on:
         branches:
             - 2024
             - 2025
-            - update_2024 # TODO: Remove this
 
 permissions:
     contents: write
