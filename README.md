@@ -1,21 +1,7 @@
 # Python template repository
 
-### Create a virtual Python environment
+### Create and activate local environment for development
 
 ```bash
-python3.12 -m venv .venv
-source .venv/bin/activate
-```
-
-### Install `pre-commit`
-
-```bash
-pip install pre-commit
-pre-commit install
-```
-
-### Install the package in development mode
-
-```bash
-pip install -e .
+bash setup_venv.sh && source .venv/bin/activate
 ```
