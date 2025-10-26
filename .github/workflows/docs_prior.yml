@@ -1,0 +1,48 @@
+# https://github.com/squidfunk/mkdocs-material/discussions/4759
+
+on:
+    release:
+        types:
+            - published
+            - edited
+
+permissions:
+    contents: write
+
+concurrency: # Do not run multiple instances of this workflow at the same time
+    group: example_docs
+    cancel-in-progress: false
+
+jobs:
+    deploy_docs:
+        runs-on: [ubuntu-latest]
+
+        timeout-minutes: 30 # Aborts if the build takes more than x minutes
+
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.12"
+
+            - name: Install package
+              run: pip install .[docs]
+
+            - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+            - uses: actions/cache@v4
+              with:
+                  key: mkdocs-material-${{ env.cache_id }}
+                  path: .cache
+                  restore-keys: |
+                      mkdocs-material-
+
+            - name: Setup identity
+              run: |
+                  git config --global user.name "Github Action docs_latest"
+                  git config --global user.email docs.deploy@example.edu
+
+            - name: Deploy docs
+              run: mike deploy --push --update-aliases ${{ github.event.release.tag_name }} latest
