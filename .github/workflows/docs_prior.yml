@@ -1,10 +1,12 @@
-# https://github.com/squidfunk/mkdocs-material/discussions/4759
+name: Build and deploy docs prior to release
 
 on:
-    release:
-        types:
-            - published
-            - edited
+    workflow_dispatch:
+    push:
+        branches:
+            - 2024
+            - 2025
+            - update_2024 # TODO: Remove this
 
 permissions:
     contents: write
@@ -13,16 +15,18 @@ concurrency: # Do not run multiple instances of this workflow at the same time
     group: example_docs
     cancel-in-progress: false
 
+env:
+    branch_name: ${{ github.head_ref || github.ref_name }}
+
 jobs:
     deploy_docs:
         runs-on: [ubuntu-latest]
-
         timeout-minutes: 30 # Aborts if the build takes more than x minutes
-
         steps:
             - uses: actions/checkout@v4
               with:
                   fetch-depth: 0
+
             - name: Set up Python
               uses: actions/setup-python@v5
               with:
@@ -45,4 +49,4 @@ jobs:
                   git config --global user.email docs.deploy@example.edu
 
             - name: Deploy docs
-              run: mike deploy --push --update-aliases ${{ github.event.release.tag_name }} latest
+              run: mike deploy --push "${{ env.branch_name }}"
