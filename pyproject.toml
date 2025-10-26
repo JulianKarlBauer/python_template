@@ -10,11 +10,6 @@ dynamic = [
   "version",
 ]
 name = "example"
-dependencies = [
-  "numpy",
-  "pytest"
-]
-requires-python = ">=3.12"
 authors = [
   {name = "Julian Karl Bauer"},
 ]
@@ -26,6 +21,18 @@ readme = "README.md"
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python"
+]
+requires-python = ">=3.12"
+dependencies = [
+  "numpy",
+  "pytest"
+]
+
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+    "ipython",
 ]
 
 [tool.setuptools.package-data]
