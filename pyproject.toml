@@ -33,6 +33,20 @@ dependencies = [
 dev = [
     "pre-commit",
     "ipython",
+    "pytest",
+]
+docs = [
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocstrings",
+  "mkdocstrings-python",
+  "markdown-exec",
+  "pymdown-extensions",
+  "mkdocs-print-site-plugin",
+  "mkdocs-macros-plugin",
+  "mike",
+  "mkdocs-git-authors-plugin",
+  "mkdocs-open-in-new-tab",
 ]
 
 [tool.setuptools.package-data]

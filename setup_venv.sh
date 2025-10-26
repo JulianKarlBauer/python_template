@@ -11,4 +11,4 @@ source "$VENV_DIR/bin/activate"
 
 # Install package with development dependencies
 pip install --upgrade pip
-pip install -e .[dev]
+pip install -e .[dev,docs]
